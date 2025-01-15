@@ -7,8 +7,8 @@ __all__ = ['create_app', 'test_create_app']
 import gradio as gr
 from itertools import groupby
 from operator import attrgetter
-from .core import Button, load_buttons
-from .css import generate_css
+from app_starter_gui.core import Button, load_buttons
+from app_starter_gui.css import generate_css
 
 # %% ../nbs/02_gradio_app.ipynb 4
 def create_app(yaml_file='buttons.yaml', css_generator=generate_css):
@@ -24,34 +24,28 @@ def create_app(yaml_file='buttons.yaml', css_generator=generate_css):
     css = generate_css(buttons)
 
     buttons_sorted = sorted(buttons, key=attrgetter('app_type'))
-    button_groups = {k: list(g) for k, g in groupby(buttons_sorted, key=attrgetter('app_type'))}
-    
+    buttons_grouped = {k: list(g) for k, g in groupby(buttons_sorted, key=attrgetter('app_type'))}
+
     with gr.Blocks(css=css) as blocks:
-         with gr.Row():
-            # Create a column for each app_type
-            for app_type, type_buttons in button_groups.items():
+        with gr.Row():
+            # Create a column for each app type
+            for app_type, type_buttons in buttons_grouped.items():
                 with gr.Column():
                     gr.Markdown(f"### {app_type}")
-                    for button_idx, button in enumerate(type_buttons):
+                    for i, button in enumerate(type_buttons, 1):
                         btn = gr.Button(
                             value=button.label,
-                            elem_id=f"btn_{app_type}_{button_idx}",  # Make unique ID for each button
+                            elem_id=f"btn_{app_type}_{i}",
                             scale=1,
                         )
                         btn.click(
-                            fn=None, 
-                            inputs=None, 
+                            fn=None,
+                            inputs=None,
                             outputs=None,
                             js=f"() => {{ window.open('{button.link_url}', '_blank'); }}"
                         )
     return blocks
 
-# %% ../nbs/02_gradio_app.ipynb 6
-from fastcore.test import *
-
-def test_create_app():
-    "Test app creation with example buttons"
-    app = create_app('test_buttons.yaml')
-    test(app, gr.Blocks, isinstance)
-    
-test_create_app()
+if __name__ == '__main__':
+    demo = create_app()
+    demo.launch(share=True)

@@ -4,6 +4,8 @@
 __all__ = ['generate_css', 'test_generate_css']
 
 # %% ../nbs/01_css.ipynb 2
+from operator import attrgetter
+from itertools import groupby
 from .core import Button
 from fastcore.test import *  # for test_assert
 
@@ -72,10 +74,16 @@ def generate_css(buttons):
     """
     
     all_css = []
-    for i, button in enumerate(buttons, 1):
-        btn_id = f"btn{i}"
-        css = css_template.format(btn_id=btn_id, image_url=button.image_url)
-        all_css.append(css)
+    
+    # Sort buttons by app_type to match the dashboard layout
+    buttons = sorted(buttons, key=attrgetter('app_type'))
+    button_groups = {k: list(g) for k, g in groupby(buttons, key=attrgetter('app_type'))}
+    
+    for app_type, type_buttons in button_groups.items():
+        for button_idx, button in enumerate(type_buttons, 1):
+            btn_id = f"btn_{app_type}_{button_idx}"
+            css = css_template.format(btn_id=btn_id, image_url=button.image_url)
+            all_css.append(css)
     
     return "\n".join(all_css)
 
@@ -89,7 +97,7 @@ def test_generate_css():
         Button("Search", "img.jpg", "https://search.com", "Search")
     ]
     css = generate_css(buttons)
-    test('#btn1', css.lower(), lambda x,y: x in y)
-    test('#btn2', css.lower(), lambda x,y: x in y)
+    test('#btn_ai_1', css.lower(), lambda x,y: x in y)
+    test('#btn_search_1', css.lower(), lambda x,y: x in y)
 
 test_generate_css()
