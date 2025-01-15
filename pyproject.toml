@@ -1,0 +1,49 @@
+[project]
+name = "app_starter_gui"
+version = "0.0.1"
+description = "A simple GUI to quickly switch to URL-apps I often use."
+authors = [
+    {name = "Hopsakee", email = "jdejong@posteo.nl"},
+    {name = "Jelle de Jong", email = "jdejong@posteo.nl"},
+]
+dependencies = [
+    "nbdev>=2.3.34",
+    "gradio>=5.12.0",
+    "jupyterlab-quarto>=0.3.5",
+    "jupyter>=1.1.1",
+    "jupyterlab>=4.3.4",
+    "pyyaml>=6.0.2",
+    "fastcore>=1.7.28",
+]
+requires-python = ">=3.7"
+readme = "README.md"
+license = {text = "Apache Software License 2.0"}
+keywords = ["nbdev jupyter notebook python"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/Hopsakee/app_starter_gui"
+
+[project.optional-dependencies]
+dev = []
+
+[project.entry-points.nbdev]
+app_starter_gui = "app_starter_gui._modidx:d"
+[tool.pdm]
+distribution = true
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"

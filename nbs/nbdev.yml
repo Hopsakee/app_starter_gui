@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "Hopsakee/app_starter_gui"
+  site-url: "https://Hopsakee.github.io/Hopsakee/app_starter_gui"
+  description: "A simple GUI to quickly switch to URL-apps I often use."
+  repo-branch: main
+  repo-url: "https://github.com/Hopsakee/Hopsakee/app_starter_gui"
