@@ -1,0 +1,8 @@
+- app_type: Type1
+  image_url: img1.jpg
+  label: Test1
+  link_url: http://test1.com
+- app_type: Type2
+  image_url: img2.jpg
+  label: Test2
+  link_url: http://test2.com
