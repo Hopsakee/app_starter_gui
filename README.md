@@ -1,3 +1,9 @@
+---
+title: app_starter_gui
+app_file: gradio_app.py
+sdk: gradio
+sdk_version: 5.12.0
+---
 # Hopsakee/app_starter_gui
 
 
