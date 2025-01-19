@@ -10,3 +10,7 @@
   image_url: https://pbs.twimg.com/profile_images/679312292450836480/2ZwNu2ng.jpg
   link_url: https://hf.co/chat/assistant/6687f35b345e9925e139157f
   app_type: WDODelta
+- label: Prompts inspiratie
+  image_url: https://cdn.leonardo.ai/users/2c5837c8-12b4-44ab-8615-31fe264f3357/generations/78fe01eb-df41-4f6d-af02-55e92e39a528/variations/Default_Create_an_app_icon_that_integrates_the_following_eleme_3_78fe01eb-df41-4f6d-af02-55e92e39a528_0.png
+  link_url: https://hf.co/chat/assistant/67706c55ffa670c112bc5f0
+  app_type: Prompt
