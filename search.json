@@ -1,0 +1,102 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hopsakee/app_starter_gui",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "Hopsakee/app_starter_gui"
+    ]
+  },
+  {
+    "objectID": "index.html#developer-guide",
+    "href": "index.html#developer-guide",
+    "title": "Hopsakee/app_starter_gui",
+    "section": "Developer Guide",
+    "text": "Developer Guide\nIf you are new to using nbdev here are some useful pointers to get you started.\n\nInstall Hopsakee/app_starter_gui in Development mode\n# make sure Hopsakee/app_starter_gui package is installed in development mode\n$ pip install -e .\n# if using PDM you should probably use\n$ pdm install\n\n# make changes under nbs/ directory\n# ...\n\n# compile to have changes apply to Hopsakee/app_starter_gui\n$ nbdev_prepare\n# if using PDM you should probably first explicitly activate the project environment\n$ eval $(pdm venv activate in-project)",
+    "crumbs": [
+      "Hopsakee/app_starter_gui"
+    ]
+  },
+  {
+    "objectID": "index.html#usage",
+    "href": "index.html#usage",
+    "title": "Hopsakee/app_starter_gui",
+    "section": "Usage",
+    "text": "Usage\n\nInstallation\nInstall latest from the GitHub repository:\n$ pip install git+https://github.com/Hopsakee/Hopsakee/app_starter_gui.git\nor from conda\n$ conda install -c Hopsakee Hopsakee/app_starter_gui\nor from pypi\n$ pip install Hopsakee/app_starter_gui\n\n\nDocumentation\nDocumentation can be found hosted on this GitHub repository’s pages. Additionally you can find package manager specific guidelines on conda and pypi respectively.",
+    "crumbs": [
+      "Hopsakee/app_starter_gui"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "Hopsakee/app_starter_gui",
+    "section": "How to use",
+    "text": "How to use\n\nBasic example:\n\nfrom app_starter_gui.core import Button\n\n\n---------------------------------------------------------------------------\nModuleNotFoundError                       Traceback (most recent call last)\nCell In[4], line 1\n----&gt; 1 from app_starter_gui.core import Button\n\nModuleNotFoundError: No module named 'app_starter_gui'\n\n\n\n\nfrom app_starter_gui.core import Button \nfrom app_starter_gui.gradio_app import create_app\n\n\n\nCreate some buttons\n\nIn the codebase:\n\nbuttons = [ Button(\"ChatGPT\", \"chatgpt.jpg\", \"https://chat.openai.com\", \"AI\"), Button(\"Google\", \"google.jpg\", \"https://google.com\", \"Search\") ]\n\n\n\nConfiguration with YAML\nYou can define your buttons in a YAML file (buttons.yaml):\n- label: ChatGPT\n  image_url: chatgpt.jpg\n  link_url: https://chat.openai.com\n  app_type: AI\n- label: Google\n  image_url: google.jpg\n  link_url: https://google.com\n  app_type: Search\n\n\n\nLaunch the App\nLoad buttons from YAML and create the app:\n\nfrom app_starter_gui.gradio_app import create_app\n\nCreate and launch app from YAML\n\napp = create_app('buttons.yaml')\napp.launch(share=True)",
+    "crumbs": [
+      "Hopsakee/app_starter_gui"
+    ]
+  },
+  {
+    "objectID": "index.html#features",
+    "href": "index.html#features",
+    "title": "Hopsakee/app_starter_gui",
+    "section": "Features",
+    "text": "Features\n\nDefine buttons with labels, images, links, and types\nGroup buttons by type with automatic styling\nResponsive grid layout\nLoad button configurations from YAML\nCustomizable CSS for each button type",
+    "crumbs": [
+      "Hopsakee/app_starter_gui"
+    ]
+  },
+  {
+    "objectID": "index.html#customizing-layout",
+    "href": "index.html#customizing-layout",
+    "title": "Hopsakee/app_starter_gui",
+    "section": "Customizing Layout",
+    "text": "Customizing Layout\nThe buttons are arranged in a responsive grid layout. You can customize this by modifying the CSS:\n\nfrom app_starter_gui.core import Button, save_buttons \nfrom app_starter_gui.css import generate_css\n\n\n# Create custom CSS\ndef my_custom_css(buttons):\n  types = {b.app_type for b in buttons}\n  return \"\"\"\n  .button-grid {\n      display: grid;\n      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* wider buttons */\n      gap: 2rem; /* more space between buttons */\n      padding: 2rem; /* more padding around grid */ \n  }\n  \"\"\"\n\n# Use custom CSS when creating app\napp = create_app('buttons.yaml', css_generator=my_custom_css)",
+    "crumbs": [
+      "Hopsakee/app_starter_gui"
+    ]
+  },
+  {
+    "objectID": "index.html#image-urls",
+    "href": "index.html#image-urls",
+    "title": "Hopsakee/app_starter_gui",
+    "section": "Image URLs",
+    "text": "Image URLs\nFor button images, you must use either: - URLs to images hosted online (e.g., https://example.com/image.jpg) - URLs to images in your GitHub repository (e.g., https://raw.githubusercontent.com/username/repo/main/images/icon.png)\nLocal file paths won’t work because: 1. Gradio needs the images to be web-accessible 2. Other users won’t have access to files on your local machine\nExample YAML with proper image URLs:\n- label: ChatGPT\n  image_url: https://raw.githubusercontent.com/your-repo/images/chatgpt-icon.png\n  link_url: https://chat.openai.com\n  app_type: AI",
+    "crumbs": [
+      "Hopsakee/app_starter_gui"
+    ]
+  },
+  {
+    "objectID": "gradio_app.html",
+    "href": "gradio_app.html",
+    "title": "gradio_app",
+    "section": "",
+    "text": "source\n\ncreate_app\n\n create_app (yaml_file='buttons.yaml', css_generator=&lt;function\n             generate_css&gt;)\n\n*Create a Gradio dashboard for the button interface\nArgs: yaml_file: Path to YAML file containing button data (default: ‘buttons.yaml’) css_generator: Function to generate CSS (default: generate_css) Returns: gr.Blocks: Gradio interface*\n\n# Example usage\napp = create_app('test_buttons.yaml')",
+    "crumbs": [
+      "gradio_app"
+    ]
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "source\n\nButton\n\n Button (label:str, image_url:str, link_url:str, app_type:str)\n\nA button with label, image, link, and type\n\nsource\n\n\nsave_buttons\n\n save_buttons (buttons, file='buttons.yaml')\n\n*Save buttons to YAML file\nArgs: buttons: List of Button objects file: Path to YAML file (default: ‘buttons.yaml’)*\n\nsource\n\n\nload_buttons\n\n load_buttons (file='buttons.yaml')\n\n*Load buttons from YAML file\nArgs: file: Path to YAML file (default: ‘buttons.yaml’) Returns: List of Button objects*\n\n# Example usage\nexample_buttons = [\n    Button(\n        label=\"ChatGPT\",\n        image_url=\"https://example.com/chatgpt.jpg\",\n        link_url=\"https://chat.openai.com\",\n        app_type=\"AI\"\n    ),\n    Button(\n        label=\"Google\",\n        image_url=\"https://example.com/google.jpg\",\n        link_url=\"https://google.com\",\n        app_type=\"Search\"\n    )\n]\n\n# Save example buttons\nsave_buttons(example_buttons, \"test_buttons.yaml\")\n\n# Load and test\nloaded_buttons = load_buttons(\"test_buttons.yaml\")",
+    "crumbs": [
+      "core"
+    ]
+  },
+  {
+    "objectID": "css.html",
+    "href": "css.html",
+    "title": "CSS",
+    "section": "",
+    "text": "from nbdev.showdoc import show_doc\n\n\nsource\n\ngenerate_css\n\n generate_css (buttons)\n\n*Generate CSS styling for buttons with image backgrounds\nArgs: buttons: List of Button objects Returns: str: CSS styling with unique button IDs and hover effects\nEach button gets: - 230px height (180px image + 50px label) - Hover animation with lift effect - Image zoom on hover - Rounded corners*\n\n# Example usage\nbuttons = [\n    Button(\"AI App\", \"img.jpg\", \"https://ai.com\", \"AI\"),\n    Button(\"Search Engine\", \"img.jpg\", \"https://search.com\", \"Search\")\n]\n\ncss = generate_css(buttons)\nprint(css)\n\n\n---------------------------------------------------------------------------\nNameError                                 Traceback (most recent call last)\nCell In[5], line 3\n      1 # Example usage\n      2 buttons = [\n----&gt; 3     Button(\"AI App\", \"img.jpg\", \"https://ai.com\", \"AI\"),\n      4     Button(\"Search Engine\", \"img.jpg\", \"https://search.com\", \"Search\")\n      5 ]\n      7 css = generate_css(buttons)\n      8 print(css)\n\nNameError: name 'Button' is not defined",
+    "crumbs": [
+      "CSS"
+    ]
+  }
+]
